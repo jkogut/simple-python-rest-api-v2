@@ -1,0 +1,10 @@
+{
+    "Survived":0,
+    "Pclass":1,
+    "Last":"Mr Jan Novack",
+    "Sex":"male",
+    "Age":23.0,
+    "Siblings/Spouses Aboard":1,
+    "Parents/Children Aboard":3,
+    "Fare":105.8  
+}

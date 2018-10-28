@@ -94,37 +94,37 @@ class TestApiPost(object):
 
 
 ## DELETE
-# class TestApiDelete(object):
-#     '''
-#     test API DELETE responses
-#     '''
+class TestApiDelete(object):
+    '''
+    test API DELETE responses
+    '''
 
-#     def test_apiDeleteNonExistentPassenger(self):
-#         ''' test API DELETE with non existent  passengers Id '''
+    def test_apiDeleteNonExistentPassenger(self):
+        ''' test API DELETE with non existent  passengers Id '''
 
-#         urlGet = tstcfg.apiUrl + '/v1/passengers'    
-#         rGet = requests.get(urlGet) # GET all passenegers
-#         passNum = len(rGet.json()) # count them
-#         passNum = passNum + 100 # be sure Id is non existent
+        urlGet = tstcfg.apiUrl + '/v1/passengers'    
+        rGet = requests.get(urlGet) # GET all passenegers
+        passNum = len(rGet.json()) # count them
+        passNum = passNum + 100 # be sure Id is non existent
         
-#         urlDel = tstcfg.apiUrl + '/v1/passengers/delete/' + str(passNum) 
-#         rDelete = requests.delete(urlDel) # DELETE non existent passeneger 
+        urlDel = tstcfg.apiUrl + '/v1/passengers/delete/' + str(passNum) 
+        rDelete = requests.delete(urlDel) # DELETE non existent passeneger 
 
-#         assert rDelete.status_code == 400 # BAD REQUEST
+        assert rDelete.status_code == 400 # BAD REQUEST
 
         
-#     def test_apiDeletePassenger(self):
-#         ''' test API DELETE with passengers Id '''
+    def test_apiDeletePassenger(self):
+        ''' test API DELETE with passengers Id '''
 
-#         with open('app/payload.json', 'r') as f:
-#             payload = json.load(f)
-#             passengerName = payload['Name']
+        with open('app/payload.json', 'r') as f:
+            payload = json.load(f)
+            passengerName = payload['Name']
 
-#         urlGet = tstcfg.apiUrl + '/v1/passengers'    
-#         rGet = requests.get(urlGet) # GET all passenegers
-#         passId = rGet.json()[passengerName] # find his Id
+        urlGet = tstcfg.apiUrl + '/v1/passengers'    
+        rGet = requests.get(urlGet) # GET all passenegers
+        passId = rGet.json()[passengerName] # find his Id
         
-#         urlDel = tstcfg.apiUrl + '/v1/passengers/delete/' + str(passId) 
-#         rDelete = requests.delete(urlDel) # DELETE passeneger 
+        urlDel = tstcfg.apiUrl + '/v1/passengers/delete/' + str(passId) 
+        rDelete = requests.delete(urlDel) # DELETE passeneger 
 
-#         assert rDelete.status_code == 200 # OK
+        assert rDelete.status_code == 200 # OK

@@ -81,16 +81,16 @@ class TestApiPost(object):
 
             assert r.status_code == 400 # BAD REQUEST
 
-    # def test_apiPostNewPassenger(self):
-    #     ''' test API POST with new passenger creation '''
+    def test_apiPostNewPassenger(self):
+        ''' test API POST with new passenger creation '''
 
-    #     url = tstcfg.apiUrl + '/v1/passengers/new'
+        url = tstcfg.apiUrl + '/v1/passengers/new'
 
-    #     with open('app/payload.json', 'r') as f:
-    #         payload = json.load(f)
-    #         r = requests.post(url, json=payload)
+        with open('app/payload.json', 'r') as f:
+            payload = json.load(f)
+            r = requests.post(url, json=payload)
 
-    #         assert r.status_code == 201 # CREATED
+            assert r.status_code == 201 # CREATED
 
 
 ## DELETE

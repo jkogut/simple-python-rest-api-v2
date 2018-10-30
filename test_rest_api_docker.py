@@ -20,7 +20,7 @@ class TestConfig(object):
     pass
 
 tstcfg = TestConfig()
-tstcfg.apiUrl = 'http://localhost:5002/api'
+tstcfg.apiUrl = 'http://0.0.0.0:5002/api'
 
 ##############################
 # Tests section starts here  #

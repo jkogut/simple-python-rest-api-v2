@@ -4,7 +4,7 @@ services:
   mariadb-service:
     build: ./mariadb
     ports:    
-      - 3306:3306
+      - 33906:3306
      
   normalize-db-service:
     build: ./normalize-db

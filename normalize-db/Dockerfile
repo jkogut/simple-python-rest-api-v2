@@ -7,4 +7,4 @@ RUN apk add --no-cache mariadb-client \
 
 WORKDIR /app-db
 
-CMD /bin/sh normalize.sh mariadb-service 33906
+CMD /bin/sh normalize.sh mariadb-service 3306

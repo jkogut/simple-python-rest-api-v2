@@ -20,8 +20,8 @@ services:
     build: ./app
     volumes:
       - ./app:/app
-    ports:
-      - 5002:5002
+    # ports:
+    #   - 5002:5002
     depends_on:
       - normalize-db-service
       

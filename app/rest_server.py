@@ -17,7 +17,10 @@ from sqlalchemy.orm import sessionmaker
 
 app = Flask(__name__)
 
-engine = create_engine('sqlite:///titanic.db', echo=True)
+## MariaDB "mysql://scott:tiger@localhost/test"
+engine = create_engine('mysql://root:password@mariadb-service/titanic', echo=True)
+## sqllite
+# engine = create_engine('sqlite:///titanic.db', echo=True)
 Base = declarative_base(engine)
 ########################################################
 

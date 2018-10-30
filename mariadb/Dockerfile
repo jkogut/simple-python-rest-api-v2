@@ -5,6 +5,7 @@ ENV MYSQL_ROOT_PASSWORD=password \
     MYSQL_USER=restuser \
     MYSQL_PASSWORD=restpassword
 
+## in case you need to normalize DB localy
 # WORKDIR /app-db
 # RUN apt-get update -y && apt-get install python-pip -y \
 #  && pip install csvkit \

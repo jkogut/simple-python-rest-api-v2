@@ -1,0 +1,24 @@
+version: '3'
+
+services:   
+  mariadb-service:
+    build: ./mariadb
+    ports:    
+      - 3306:3306
+     
+  normalize-db-service:
+    build: ./normalize-db
+    volumes:
+      - ./normalize-db:/app-db/
+    depends_on:
+      - mariadb-service
+
+  rest-api-service:
+    build: ./app
+    volumes:
+      - ./app:/app
+    ports:
+      - 5002:5002
+    depends_on:
+      - normalize-db-service
+      

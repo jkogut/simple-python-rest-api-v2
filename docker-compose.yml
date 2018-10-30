@@ -2,9 +2,12 @@ version: '3'
 
 services:   
   mariadb-service:
-    build: ./mariadb
-    ports:    
-      - 33906:3306
+    image:  mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=titanic
+      - MYSQL_USER=restuser
+      - MYSQL_PASSWORD=restpassword
      
   normalize-db-service:
     build: ./normalize-db

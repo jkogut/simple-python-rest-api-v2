@@ -13,6 +13,7 @@ from flask import Flask, request, jsonify, abort
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import simplejson as json
 
 #####################
 app = Flask(__name__)
@@ -67,9 +68,9 @@ def getPassengers():
 
 ## GET survivedStatus
 @app.route("/api/v1/passengers/survived/<int:survivedStatus>", methods = ['GET'])
-def getPassengerId(survivedStatus):
+def getSurvivedStatus(survivedStatus):
     """
-    ---> Select survived passnagers depending on status 0 or 1
+    ---> Select survived passengers depending on status 0 or 1
     <--- Return encoded list as a JSON payload with passengers data
     """
 
@@ -78,7 +79,9 @@ def getPassengerId(survivedStatus):
     for i in filterQuery:
         survivedList.append({ x: getattr(i, x) for x in Titanic.__table__.columns.keys() })
 
-    return jsonify(survivedList)
+    # using json.dumps from simplejson to fix
+    # TypeError: Decimal('22.00') is not JSON serializable 
+    return json.dumps(survivedList)
 
 
 ## POST add new passenger

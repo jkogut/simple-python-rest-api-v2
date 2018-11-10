@@ -1,6 +1,5 @@
-'''                                                                                                                           
-Simple REST API in Python
-'''
+"""                                                                                                                   Simple REST API in Python
+"""
 
 __author__     = "Jan Kogut"
 __copyright__  = "Jan Kogut"
@@ -15,17 +14,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
+#####################
 app = Flask(__name__)
 
-## MariaDB "mysql://scott:tiger@localhost/test"
 engine = create_engine('mysql://root:password@mariadb-service/titanic', echo=True)
-## sqllite
-## engine = create_engine('sqlite:///titanic.db', echo=True)
 Base = declarative_base(engine)
-########################################################
+
 
 class Titanic(Base):
-    ''' Titanic Base object '''
+    """ Titanic Base object """
     
     __tablename__ = 'titanic'
     __table_args__ = {'autoload':True}
@@ -33,10 +30,10 @@ class Titanic(Base):
 
 ## Initialise session    
 def loadSession():
-    '''
+    """
     ---> Init session for given Base 
     <--- Return session
-    '''
+    """
     
     metadata = Base.metadata
     Session = sessionmaker(bind=engine)
@@ -47,10 +44,10 @@ def loadSession():
 ## API STATUS
 @app.route("/api/status", methods = ['GET'])
 def getStatus():
-    '''
+    """
     ---> Check API Status
     <--- Return JSON with API_status
-    '''
+    """
     
     result = {'API_status':'OK'}
     return jsonify(result)
@@ -59,10 +56,10 @@ def getStatus():
 ## GET passengers
 @app.route("/api/v1/passengers", methods = ['GET'])
 def getPassengers():
-    '''
+    """
     ---> Select all passengers
     <--- Return JSON with passengerId and Name
-    '''
+    """
 
     result = dict(session.query(Titanic.Name,Titanic.Id).all())
     return jsonify(result)
@@ -71,10 +68,10 @@ def getPassengers():
 ## GET survivedStatus
 @app.route("/api/v1/passengers/survived/<int:survivedStatus>", methods = ['GET'])
 def getPassengerId(survivedStatus):
-    '''
+    """
     ---> Select survived passnagers depending on status 0 or 1
     <--- Return JSON payload with passengers data
-    '''
+    """
 
     filterQuery = session.query(Titanic).filter(Titanic.Survived==survivedStatus).all()
     result      = { x: getattr(filterQuery[0], x) for x in Titanic.__table__.columns.keys() }
@@ -84,10 +81,10 @@ def getPassengerId(survivedStatus):
 ## POST add new passenger
 @app.route("/api/v1/passengers/new", methods = ['POST'])
 def insertNewPassenger():
-    '''
+    """
     ---> Add new passenger from JSON payload
     <--- Return added JSON payload with response code 
-    '''
+    """
 
     payload = request.json
     if not payload or not 'Name' in payload:
@@ -103,19 +100,19 @@ def insertNewPassenger():
 ## PUT 
 @app.route("/api/v1/passengers/update/<int:passengerId>", methods = ['PUT'])
 def updatePassenger(passengerId):
-    '''
+    """
     ---> Update data of existing passenger
     <--- Return updated JSON payload with response code
-    '''
+    """
     pass
 
 ## DELETE
 @app.route("/api/v1/passengers/delete/<int:passengerId>", methods = ['DELETE'])
 def deletePasseneger(passengerId):
-    '''
+    """
     ---> Delete existing passenger
     <--- Return deleted response code 
-    '''
+    """
 
     if len(session.query(Titanic).filter(Titanic.Id==passengerId).all()) == 0:
         result = {passengerId:"NOT EXISTS"}

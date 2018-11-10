@@ -70,12 +70,15 @@ def getPassengers():
 def getPassengerId(survivedStatus):
     """
     ---> Select survived passnagers depending on status 0 or 1
-    <--- Return JSON payload with passengers data
+    <--- Return encoded list as a JSON payload with passengers data
     """
 
     filterQuery = session.query(Titanic).filter(Titanic.Survived==survivedStatus).all()
-    result      = { x: getattr(filterQuery[0], x) for x in Titanic.__table__.columns.keys() }
-    return jsonify(result)
+    survivedList = []
+    for i in filterQuery:
+        survivedList.append({ x: getattr(i, x) for x in Titanic.__table__.columns.keys() })
+
+    return jsonify(survivedList)
 
 
 ## POST add new passenger

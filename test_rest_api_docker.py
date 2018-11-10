@@ -10,7 +10,7 @@ __maintainer__ = "Jan Kogut"
 __status__     = "Beta"
 
 import requests
-import json
+import simplejson as json
 
 ##############################
 # Config section starts here #
@@ -37,7 +37,6 @@ class TestApiStatus(object):
 
         url = tstcfg.apiUrl + '/status'
         r = requests.get(url)
-
         assert r.json()['API_status'] == 'OK'
 
         
@@ -52,16 +51,15 @@ class TestApiGet(object):
 
         url = tstcfg.apiUrl + '/v1/passengers'
         r = requests.get(url)
-
         assert type(r.json()) is dict
 
-    # def test_apiGetSurvived(self): <---- TypeError: Decimal('22.00') is not JSON serializable ???
-    #     ''' test API GET surived passengers based on survived status 0 or 1 '''
+        
+    def test_apiGetSurvived(self):##  <---- TypeError: Decimal('22.00') is not JSON serializable ???
+        ''' test API GET surived passengers based on survived status 0 or 1 '''
 
-    #     url = tstcfg.apiUrl + '/v1/passengers/survived/1'
-    #     r = requests.get(url)
-
-    #     assert type(r.json()) is dict
+        url = tstcfg.apiUrl + '/v1/passengers/survived/1'
+        r = requests.get(url)
+        assert type(r.json()) is list
 
         
 ## POST
@@ -78,8 +76,8 @@ class TestApiPost(object):
         with open('app/fake_payload.json', 'r') as f:
             payload = json.load(f)
             r = requests.post(url, json=payload)
-
             assert r.status_code == 400 # BAD REQUEST
+
 
     def test_apiPostNewPassenger(self):
         ''' test API POST with new passenger creation '''
@@ -89,7 +87,6 @@ class TestApiPost(object):
         with open('app/payload.json', 'r') as f:
             payload = json.load(f)
             r = requests.post(url, json=payload)
-
             assert r.status_code == 201 # CREATED
 
 
@@ -106,10 +103,8 @@ class TestApiDelete(object):
         rGet = requests.get(urlGet) # GET all passenegers
         passNum = len(rGet.json()) # count them
         passNum = passNum + 100 # be sure Id is non existent
-        
         urlDel = tstcfg.apiUrl + '/v1/passengers/delete/' + str(passNum) 
         rDelete = requests.delete(urlDel) # DELETE non existent passeneger 
-
         assert rDelete.status_code == 400 # BAD REQUEST
 
         
@@ -123,8 +118,6 @@ class TestApiDelete(object):
         urlGet = tstcfg.apiUrl + '/v1/passengers'    
         rGet = requests.get(urlGet) # GET all passenegers
         passId = rGet.json()[passengerName] # find his Id
-        
         urlDel = tstcfg.apiUrl + '/v1/passengers/delete/' + str(passId) 
         rDelete = requests.delete(urlDel) # DELETE passeneger 
-
         assert rDelete.status_code == 200 # OK

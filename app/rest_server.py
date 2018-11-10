@@ -76,7 +76,7 @@ def getPassengerId(survivedStatus):
     <--- Return JSON payload with passengers data
     '''
 
-    filterQuery = session.query(Titanic).filter(Titanic.Id==survivedStatus).all()
+    filterQuery = session.query(Titanic).filter(Titanic.Survived==survivedStatus).all()
     result      = { x: getattr(filterQuery[0], x) for x in Titanic.__table__.columns.keys() }
     return jsonify(result)
 

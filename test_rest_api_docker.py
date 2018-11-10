@@ -10,7 +10,7 @@ __maintainer__ = "Jan Kogut"
 __status__     = "Beta"
 
 import requests
-import simplejson as json
+import json
 
 ##############################
 # Config section starts here #

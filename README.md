@@ -40,3 +40,25 @@ curl http://0.0.0.0:5002/api/v1/passengers/survived/1 |jq
 curl -H "Content-Type: application/json" -X POST -d@payload.json http://0.0.0.0:5002/api/v1/passengers/new |jq
 curl -X DELETE http://0.0.0.0:5002/api/v1/passengers/delete/887 |jq
 ```
+
+Debug
+-----
+
+Clone the repo:
+
+```
+git clone git@github.com:jkogut/simple-python-rest-api-v1.git
+```
+
+Use `virtualenv` and install dependencies with `pip`:
+```
+virtualenv venv 
+source venv/bin/activate
+pip install -r app/requirements.txt
+```
+
+Run flask rest application in `debug mode`:
+```
+cd app;
+python rest_server.py
+```

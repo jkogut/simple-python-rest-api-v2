@@ -66,6 +66,18 @@ def getPassengers():
     return jsonify(result)
 
 
+## GET passengers
+@app.route("/api/v1/passengers/<int:passengerId>", methods = ['GET'])
+def getPassengerId(passengerId):
+    """
+    ---> Select passenger dependeing on passengerId
+    <--- Return JSON with passengerIds data
+    """
+    filterQuery = session.query(Titanic).filter(Titanic.Id==passengerId).all()
+    result = { x: getattr(filterQuery[0], x) for x in Titanic.__table__.columns.keys() }
+    return jsonify(result)
+
+
 ## GET survivedStatus
 @app.route("/api/v1/passengers/survived/<int:survivedStatus>", methods = ['GET'])
 def getSurvivedStatus(survivedStatus):

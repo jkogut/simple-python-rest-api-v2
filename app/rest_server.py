@@ -66,11 +66,11 @@ def getPassengers():
     return jsonify(result)
 
 
-## GET passengers
+## GET passenger's data
 @app.route("/api/v1/passengers/<int:passengerId>", methods = ['GET'])
 def getPassengerId(passengerId):
     """
-    ---> Select passenger dependeing on passengerId
+    ---> Select passenger depending on passengerId
     <--- Return JSON with passengerIds data
     """
     filterQuery = session.query(Titanic).filter(Titanic.Id==passengerId).all()

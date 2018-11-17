@@ -62,7 +62,7 @@ def getPassengers():
     <--- Return JSON with passengerId and Name
     """
 
-    result = dict(session.query(Titanic.Name,Titanic.Id).all())
+    result = dict(session.query(Titanic.Id,Titanic.Name).all())
     return jsonify(result)
 
 

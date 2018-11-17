@@ -109,7 +109,12 @@ class TestApiDelete(object):
 
         urlGet = tstcfg.apiUrl + '/v1/passengers'    
         rGet = requests.get(urlGet) # GET all passengers
-        passId = rGet.json()[passengerName] # find his Id
-        urlDel = tstcfg.apiUrl + '/v1/passengers/delete/' + str(passId) 
-        rDelete = requests.delete(urlDel) # DELETE passenger 
-        assert rDelete.status_code == 200 # OK
+
+        passDict = rGet.json()
+
+        for key in passDict:
+            if passDict[key] == passengerName:
+                passId = key # find his Id
+                urlDel = tstcfg.apiUrl + '/v1/passengers/delete/' + passId 
+                rDelete = requests.delete(urlDel) # DELETE passenger 
+                assert rDelete.status_code == 200 # OK

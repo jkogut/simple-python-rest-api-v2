@@ -28,6 +28,7 @@ Test available endpoints with *curl*
 
  * [GET] API status *http://0.0.0.0:5002/api/status*
  * [GET] Passengers (Id,Name)  *http://0.0.0.0:5002/api/v1/passengers*
+ * [GET] Passenger's Data (Id) *http://0.0.0.0:5002/api/v1/passengers/Id*
  * [GET] Survived Yes/No passengers *http://0.0.0.0:5002/api/v1/passengers/survived/0|1*
  * [POST] Create new employee *http://0.0.0.0:5002/api/v1/passengers/new*
  * [DELETE] Passenger (Id) *http://0.0.0.0:5002/api/v1/passengers/delete/passengerId*
@@ -36,6 +37,7 @@ Example usage:
 ```
 curl http://0.0.0.0:5002/api/status |jq
 curl http://0.0.0.0:5002/api/v1/passengers |jq
+curl http://0.0.0.0:5002/api/v1/passengers/234 |jq
 curl http://0.0.0.0:5002/api/v1/passengers/survived/1 |jq
 curl -H "Content-Type: application/json" -X POST -d@payload.json http://0.0.0.0:5002/api/v1/passengers/new |jq
 curl -X DELETE http://0.0.0.0:5002/api/v1/passengers/delete/887 |jq

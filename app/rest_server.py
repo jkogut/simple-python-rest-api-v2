@@ -18,7 +18,8 @@ import simplejson as json
 #####################
 app = Flask(__name__)
 
-engine = create_engine('mysql://root:password@mariadb-service/titanic', echo=True)
+mysqlConf = 'mysql://root:password@mariadb-service/titanic'
+engine = create_engine(mysqlConf, echo=True)
 Base = declarative_base(engine)
 
 

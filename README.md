@@ -60,7 +60,7 @@ pip install -r app/requirements.txt
 ```
 
 Comment out rest api application *(rest-api-service)* in docker-compose file
-and run MariaDB and normalize-db-service containers with docker compose:
+and run *(mariadb-service)* and *(normalize-db-service)* containers with docker compose:
 
 `docker-compose up`
 

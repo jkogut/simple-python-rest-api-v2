@@ -50,6 +50,14 @@ class TestApiGet(object):
         assert type(r.json()) is dict
 
         
+    def test_apiGetPassengerData(self):
+        """ test API GET passenger's data based on Id """
+
+        url = tstcfg.apiUrl + '/v1/passengers/1'
+        r = requests.get(url)
+        assert type(r.json()) is dict
+
+        
     def test_apiGetSurvived(self):
         """ test API GET surived passengers based on survived status 0 or 1 """
 
@@ -91,11 +99,11 @@ class TestApiDelete(object):
     def test_apiDeleteNonExistentPassenger(self):
         """ test API DELETE with non existent passenger's Id """
 
-        urlGet = tstcfg.apiUrl + '/v1/passengers'    
-        rGet = requests.get(urlGet) # GET all passengers
+        urlGet  = tstcfg.apiUrl + '/v1/passengers'    
+        rGet    = requests.get(urlGet) # GET all passengers
         passNum = len(rGet.json()) # count them
         passNum = passNum + 100 # be sure Id is non existent
-        urlDel = tstcfg.apiUrl + '/v1/passengers/delete/' + str(passNum) 
+        urlDel  = tstcfg.apiUrl + '/v1/passengers/delete/' + str(passNum) 
         rDelete = requests.delete(urlDel) # DELETE non existent passenger 
         assert rDelete.status_code == 400 # BAD REQUEST
 
@@ -104,17 +112,17 @@ class TestApiDelete(object):
         """ test API DELETE with passenger's Id """
 
         with open('app/payload.json', 'r') as f:
-            payload = json.load(f)
+            payload       = json.load(f)
             passengerName = payload['Name']
 
         urlGet = tstcfg.apiUrl + '/v1/passengers'    
-        rGet = requests.get(urlGet) # GET all passengers
+        rGet   = requests.get(urlGet) # GET all passengers
 
         passDict = rGet.json()
 
         for key in passDict:
             if passDict[key] == passengerName:
-                passId = key # find his Id
-                urlDel = tstcfg.apiUrl + '/v1/passengers/delete/' + passId 
+                passId  = key # find his Id
+                urlDel  = tstcfg.apiUrl + '/v1/passengers/delete/' + passId 
                 rDelete = requests.delete(urlDel) # DELETE passenger 
                 assert rDelete.status_code == 200 # OK

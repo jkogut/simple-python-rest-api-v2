@@ -51,7 +51,7 @@ class TestApiGet(object):
 
         
     def test_apiGetPassengerData(self):
-        """ test API GET passenger's data based on Id """
+        """ test API GET passenger's data based on Id=1 """
 
         url = tstcfg.apiUrl + '/v1/passengers/1'
         r = requests.get(url)

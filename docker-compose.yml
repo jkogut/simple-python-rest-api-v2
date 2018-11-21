@@ -8,7 +8,9 @@ services:
       - MYSQL_DATABASE=titanic
       - MYSQL_USER=restuser
       - MYSQL_PASSWORD=restpassword
-     
+    # ports:  ## uncomment for local debug 
+    #   - 3306:3306
+
   normalize-db-service:
     build: ./normalize-db
     volumes:

@@ -59,14 +59,14 @@ source venv/bin/activate
 pip install -r app/requirements.txt
 ```
 
-Comment out rest api application *(rest-api-service)* in docker-compose file
-and run *(mariadb-service)* and *(normalize-db-service)* containers with docker compose:
+In `docker-compose.yml` file:
+1. Comment out whole *rest-api-service* section and allow communication with MariaDB by uncommenting ports section in *mariadb-service*. 
 
-`docker-compose up`
+2. Run *mariadb-service* and *normalize-db-service* containers with docker compose: `docker-compose up`
 
-Edit `mysqlConf` variable and replace mariadb-service to localhost in `app/rest_server.py` file.
+3. Edit `mysqlConf` variable and replace mariadb-service to *0.0.0.0* in `app/rest_server.py` file.
 
-Run flask rest application in `debug mode`:
+4. Run flask rest application in `debug mode`:
 ```
 cd app;
 python rest_server.py
